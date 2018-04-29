@@ -21,7 +21,7 @@ export default mutationWithClientMutationId({
     if (!user) {
       return {
         token: null,
-        error: 'INVALID_EMAIL_PASSWORD',
+        error: 'Invalid email or password',
       };
     }
 
@@ -30,7 +30,7 @@ export default mutationWithClientMutationId({
     if (!correctPassword) {
       return {
         token: null,
-        error: 'INVALID_EMAIL_PASSWORD',
+        error: 'Invalid email or password',
       };
     }
 
