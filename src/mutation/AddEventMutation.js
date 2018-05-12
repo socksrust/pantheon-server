@@ -8,7 +8,7 @@ import { UserLoader } from '../loader';
 import { Event as EventModel } from '../model';
 
 export default mutationWithClientMutationId({
-  name: 'ChangePassword',
+  name: 'AddEvent',
   inputFields: {
     title: {
       type: new GraphQLNonNull(GraphQLString),
@@ -25,6 +25,10 @@ export default mutationWithClientMutationId({
     publicLimit: {
       type: new GraphQLNonNull(GraphQLString),
       description: 'event date',
+    },
+    image: {
+      type: GraphQLString,
+      description: 'event image',
     },
     schedule: {
       type: new GraphQLList(
@@ -56,7 +60,7 @@ export default mutationWithClientMutationId({
       throw new Error('invalid user');
     }
 
-    const { title, description, date, publicLimit, schedule } = args;
+    const { title, description } = args;
 
     // @TODO improve validation logic
     if (!title.trim() || title.trim().length < 2) {
@@ -73,11 +77,7 @@ export default mutationWithClientMutationId({
 
     // Create new record
     const data = new EventModel({
-      title,
-      description,
-      date,
-      publicLimit,
-      schedule,
+      ...args,
     });
     const event = await data.save();
 

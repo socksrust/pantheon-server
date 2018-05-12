@@ -37,6 +37,9 @@ const Schema = new mongoose.Schema(
     publicLimit: {
       type: String,
     },
+    image: {
+      type: String,
+    },
     schedule: [SchemaSchedule],
   },
   {

@@ -1,8 +1,9 @@
 // @flow
 
-import { GraphQLObjectType, GraphQLString } from 'graphql';
+import { GraphQLObjectType, GraphQLString, GraphQLList } from 'graphql';
 import { globalIdField } from 'graphql-relay';
 import { NodeInterface } from '../interface/NodeInterface';
+import ScheduleType from './ScheduleType';
 
 export default new GraphQLObjectType({
   name: 'Event',
@@ -29,8 +30,14 @@ export default new GraphQLObjectType({
       type: GraphQLString,
       resolve: obj => obj.publicLimit,
     },
-    schedule: {
+    image: {
       type: GraphQLString,
+      description: 'event image',
+      resolve: obj => obj.image,
+    },
+    schedule: {
+      type: new GraphQLList(ScheduleType),
+      description: 'schedule',
       resolve: obj => obj.schedule,
     },
   }),
