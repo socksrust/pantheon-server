@@ -37,6 +37,6 @@ import { schema } from './schema';
       },
     );
   });
-
+  console.log(`Playground started at localhost:${graphqlPort}/playground`);
   console.log(`Server started on port ${graphqlPort}`);
 })();
