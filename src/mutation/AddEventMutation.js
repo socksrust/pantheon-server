@@ -6,6 +6,13 @@ import UserType from '../type/UserType';
 import { UserLoader } from '../loader';
 
 import { Event as EventModel } from '../model';
+import type { EventType } from '../loader/EventLoader';
+import type { GraphQLContext } from '../TypeDefinition';
+
+type Output = {
+  message: string,
+  error: string,
+};
 
 export default mutationWithClientMutationId({
   name: 'AddEvent',
@@ -53,7 +60,7 @@ export default mutationWithClientMutationId({
       ),
     },
   },
-  mutateAndGetPayload: async (args, context) => {
+  mutateAndGetPayload: async (args: EventType, context: GraphQLContext) => {
     const { user } = context;
 
     if (!user) {
@@ -65,13 +72,15 @@ export default mutationWithClientMutationId({
     // @TODO improve validation logic
     if (!title.trim() || title.trim().length < 2) {
       return {
-        error: 'Título inválido',
+        message: 'Invalid title',
+        error: 'INVALID_TITLE',
       };
     }
 
     if (!description.trim() || description.trim().length < 2) {
       return {
-        error: 'Descrição inválida',
+        message: 'Invalid description',
+        error: 'INVALID_DESCRIPTION',
       };
     }
 
@@ -79,18 +88,22 @@ export default mutationWithClientMutationId({
     const data = new EventModel({
       ...args,
     });
-    const event = await data.save();
+    await data.save();
 
-    return event;
+    // return event;
+    return {
+      message: 'Event created with success',
+      error: null,
+    };
   },
   outputFields: {
+    message: {
+      type: GraphQLString,
+      resolve: ({ message }: Output) => message,
+    },
     error: {
       type: GraphQLString,
-      resolve: ({ error }) => error,
-    },
-    me: {
-      type: UserType,
-      resolve: (obj, args, context) => UserLoader.load(context, context.user.id),
+      resolve: ({ error }: Output) => error,
     },
   },
 });
