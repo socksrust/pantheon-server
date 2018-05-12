@@ -5,6 +5,8 @@ import { mutationWithClientMutationId } from 'graphql-relay';
 import { User } from '../model';
 import { generateToken } from '../auth';
 
+import type { UserType } from '../loader/UserLoader';
+
 export default mutationWithClientMutationId({
   name: 'LoginEmail',
   inputFields: {
@@ -15,7 +17,7 @@ export default mutationWithClientMutationId({
       type: new GraphQLNonNull(GraphQLString),
     },
   },
-  mutateAndGetPayload: async ({ email, password }) => {
+  mutateAndGetPayload: async ({ email, password }: UserType) => {
     const user = await User.findOne({ email: email.toLowerCase() });
 
     if (!user) {
