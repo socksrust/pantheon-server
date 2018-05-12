@@ -29,7 +29,6 @@ export default class User {
     this._id = data._id;
     this.name = data.name;
     this.role = data.role;
-    this.role = data.role;
 
     // you can only see your own email, and your active status
     if (user && user._id.equals(data._id)) {
