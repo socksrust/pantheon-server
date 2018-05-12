@@ -1,5 +1,6 @@
 /* @flow */
 import type Dataloader from 'dataloader';
+import type { UserType } from './loader/UserLoader';
 
 type Key = string;
 
@@ -8,6 +9,6 @@ export type Dataloaders = {
 };
 
 export type GraphQLContext = {
-  user?: Object,
+  user?: UserType,
   dataloaders: Dataloaders,
 };
