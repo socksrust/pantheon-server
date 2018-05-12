@@ -13,6 +13,7 @@ type UserType = {
   password: string,
   email: string,
   active: boolean,
+  role: string,
 };
 
 export default class User {
@@ -21,11 +22,14 @@ export default class User {
   name: string;
   email: string;
   active: boolean;
+  role: string;
 
   constructor(data: UserType, { user }: GraphQLContext) {
     this.id = data.id;
     this._id = data._id;
     this.name = data.name;
+    this.role = data.role;
+    this.role = data.role;
 
     // you can only see your own email, and your active status
     if (user && user._id.equals(data._id)) {
@@ -37,10 +41,9 @@ export default class User {
 
 export const getLoader = () => new DataLoader(ids => mongooseLoader(UserModel, ids));
 
-const viewerCanSee = (context, data) => {
+const viewerCanSee = (context, data) =>
   // Anyone can see another user
-  return true;
-};
+  true;
 
 export const load = async (context: GraphQLContext, id: string): Promise<?User> => {
   if (!id) {
@@ -56,9 +59,7 @@ export const load = async (context: GraphQLContext, id: string): Promise<?User> 
   return viewerCanSee(context, data) ? new User(data, context) : null;
 };
 
-export const clearCache = ({ dataloaders }: GraphQLContext, id: string) => {
-  return dataloaders.UserLoader.clear(id.toString());
-};
+export const clearCache = ({ dataloaders }: GraphQLContext, id: string) => dataloaders.UserLoader.clear(id.toString());
 
 export const loadUsers = async (context: GraphQLContext, args: ConnectionArguments) => {
   const where = args.search ? { name: { $regex: new RegExp(`^${args.search}`, 'ig') } } : {};
