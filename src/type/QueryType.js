@@ -5,9 +5,22 @@ import { globalIdField, connectionArgs, fromGlobalId } from 'graphql-relay';
 import { NodeInterface } from '../interface/NodeInterface';
 
 import UserType from './UserType';
+import EventType from './EventType';
 import { NodeField } from '../interface/NodeInterface';
-import { UserLoader } from '../loader';
+import { UserLoader, EventLoader } from '../loader';
 import UserConnection from '../connection/UserConnection';
+import EventsConnection from '../connection/EventsConnection';
+
+import type { GraphQLContext } from '../TypeDefinition';
+import type { EventType as EventPayload } from '../loader/EventLoader';
+
+type ConectionArguments = {
+  search: string,
+  first: number,
+  after: String,
+  last: number,
+  before: string,
+};
 
 export default new GraphQLObjectType({
   name: 'Query',
@@ -16,7 +29,19 @@ export default new GraphQLObjectType({
     node: NodeField,
     me: {
       type: UserType,
-      resolve: (root, args, context) => (context.user ? UserLoader.load(context, context.user._id) : null),
+      resolve: (root, args, context: GraphQLContext) =>
+        context.user ? UserLoader.load(context, context.user._id) : null,
+    },
+    events: {
+      type: EventsConnection.connectionType,
+      args: {
+        ...connectionArgs,
+        search: {
+          type: GraphQLString,
+        },
+      },
+      resolve: (obj: EventPayload, args: ConectionArguments, context: GraphQLContext) =>
+        EventLoader.loadEvents(context, args),
     },
     user: {
       type: UserType,
@@ -38,7 +63,7 @@ export default new GraphQLObjectType({
           type: GraphQLString,
         },
       },
-      resolve: (obj, args, context) => UserLoader.loadUsers(context, args),
+      resolve: (obj, args: ConectionArguments, context: GraphQLContext) => UserLoader.loadUsers(context, args),
     },
   }),
 });
