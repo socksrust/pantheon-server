@@ -26,6 +26,10 @@ export default new GraphQLObjectType({
       type: GraphQLString,
       resolve: obj => obj.date,
     },
+    location: {
+      type: GraphQLString,
+      resolve: obj => obj.location,
+    },
     publicLimit: {
       type: GraphQLString,
       resolve: obj => obj.publicLimit,

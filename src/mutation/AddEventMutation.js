@@ -6,6 +6,7 @@ import UserType from '../type/UserType';
 import { UserLoader } from '../loader';
 
 import { Event as EventModel } from '../model';
+import EventType from '../type/EventType';
 
 export default mutationWithClientMutationId({
   name: 'AddEvent',
@@ -73,18 +74,12 @@ export default mutationWithClientMutationId({
       throw new Error('invalid user');
     }
 
-    const { title, description } = args;
+    const { title } = args;
 
     // @TODO improve validation logic
     if (!title.trim() || title.trim().length < 2) {
       return {
         error: 'Título inválido',
-      };
-    }
-
-    if (!description.trim() || description.trim().length < 2) {
-      return {
-        error: 'Descrição inválida',
       };
     }
 
@@ -96,7 +91,7 @@ export default mutationWithClientMutationId({
 
     return {
       event,
-      error: '',
+      error: null,
     };
   },
   outputFields: {
@@ -107,6 +102,10 @@ export default mutationWithClientMutationId({
     me: {
       type: UserType,
       resolve: (obj, args, context) => UserLoader.load(context, context.user.id),
+    },
+    event: {
+      type: EventType,
+      resolve: ({ event }) => event,
     },
   },
 });
