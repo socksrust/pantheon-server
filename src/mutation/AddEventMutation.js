@@ -15,7 +15,7 @@ export default mutationWithClientMutationId({
       description: 'event title',
     },
     description: {
-      type: new GraphQLNonNull(GraphQLString),
+      type: GraphQLString,
       description: 'event description',
     },
     date: {
@@ -23,12 +23,26 @@ export default mutationWithClientMutationId({
       description: 'event date',
     },
     publicLimit: {
-      type: new GraphQLNonNull(GraphQLString),
+      type: GraphQLString,
       description: 'event date',
     },
     image: {
       type: GraphQLString,
       description: 'event image',
+    },
+    location: {
+      type: new GraphQLInputObjectType({
+        name: 'location',
+        description: 'event location',
+        fields: () => ({
+          cep: {
+            type: GraphQLString,
+          },
+          geolocation: {
+            type: new GraphQLList(GraphQLString),
+          },
+        }),
+      }),
     },
     schedule: {
       type: new GraphQLList(
@@ -55,7 +69,6 @@ export default mutationWithClientMutationId({
   },
   mutateAndGetPayload: async (args, context) => {
     const { user } = context;
-
     if (!user) {
       throw new Error('invalid user');
     }
@@ -81,7 +94,10 @@ export default mutationWithClientMutationId({
     });
     const event = await data.save();
 
-    return event;
+    return {
+      event,
+      error: '',
+    };
   },
   outputFields: {
     error: {

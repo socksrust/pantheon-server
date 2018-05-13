@@ -4,20 +4,25 @@ import mongoose from 'mongoose';
 const SchemaSchedule = new mongoose.Schema({
   talker: {
     type: String,
-    required: true,
   },
   title: {
     type: String,
-    required: true,
   },
   description: {
     type: String,
-    required: false,
   },
   time: {
     type: Number,
-    required: false,
     min: 0,
+  },
+});
+
+const SchemaLocation = new mongoose.Schema({
+  cep: {
+    type: String,
+  },
+  geoLocation: {
+    type: [String],
   },
 });
 
@@ -25,14 +30,15 @@ const Schema = new mongoose.Schema(
   {
     title: {
       type: String,
-      required: true,
     },
     description: {
       type: String,
     },
     date: {
       type: String,
-      required: true,
+    },
+    location: {
+      type: SchemaLocation,
     },
     publicLimit: {
       type: String,

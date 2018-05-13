@@ -3,13 +3,13 @@ input AddEventInput {
   title: String!
 
   """event description"""
-  description: String!
+  description: String
 
   """event date"""
   date: String!
 
   """event date"""
-  publicLimit: String!
+  publicLimit: String
 
   """event image"""
   image: String
