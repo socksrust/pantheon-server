@@ -6,7 +6,7 @@ import { connectionFromMongoCursor, mongooseLoader } from '@entria/graphql-mongo
 import type { ConnectionArguments } from 'graphql-relay';
 import type { GraphQLContext } from '../TypeDefinition';
 
-type UserType = {
+export type UserType = {
   id: string,
   _id: string,
   name: string,

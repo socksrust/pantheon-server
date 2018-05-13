@@ -4,7 +4,7 @@ import mongoose from 'mongoose';
 const SchemaSchedule = new mongoose.Schema({
   talker: {
     type: String,
-    required: true,
+    required: false,
   },
   title: {
     type: String,
@@ -15,9 +15,8 @@ const SchemaSchedule = new mongoose.Schema({
     required: false,
   },
   time: {
-    type: Number,
-    required: false,
-    min: 0,
+    type: String,
+    required: true,
   },
 });
 
@@ -36,6 +35,21 @@ const Schema = new mongoose.Schema(
     },
     publicLimit: {
       type: String,
+    },
+    publicList: {
+      type: [String],
+      required: true,
+      default: [],
+    },
+    waitList: {
+      type: [String],
+      required: true,
+      default: [],
+    },
+    notGoingList: {
+      type: [String],
+      required: true,
+      default: [],
     },
     image: {
       type: String,
