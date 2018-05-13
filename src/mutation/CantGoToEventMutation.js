@@ -42,7 +42,20 @@ export default mutationWithClientMutationId({
       };
     }
 
-    const { notGoingList } = event;
+    const { notGoingList, publicList } = event;
+
+    console.log(publicList.includes(user._id));
+
+    if (publicList.indexOf(user._id) === 0) {
+      const newPublicList = publicList.filter(person => person === user._id);
+      await event.update({
+        publicList: [...newPublicList],
+        notGoingList: [...notGoingList, user._id],
+      });
+      return {
+        message: 'Thanks for warning us that you cant go to the event',
+      };
+    }
 
     await event.update({
       notGoingList: [...notGoingList, user._id],
