@@ -11,7 +11,7 @@ import logger from 'koa-logger';
 import Router from 'koa-router';
 // import { print } from 'graphql/language';
 import { graphiqlKoa } from 'apollo-server-koa';
-
+import { koaPlayground } from 'graphql-playground-middleware';
 import { schema } from './schema';
 import { jwtSecret, graphqlPort } from './config';
 import { getUser } from './auth';
@@ -70,6 +70,12 @@ router.all(
   graphiqlKoa({
     endpointURL: '/graphql',
     subscriptionsEndpoint: `ws://localhost:${graphqlPort}/subscriptions`,
+  }),
+);
+router.all(
+  '/playground',
+  koaPlayground({
+    endpoint: '/graphql',
   }),
 );
 

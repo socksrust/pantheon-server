@@ -12,8 +12,7 @@ const SchemaSchedule = new mongoose.Schema({
     type: String,
   },
   time: {
-    type: Number,
-    min: 0,
+    type: String,
   },
 });
 
@@ -42,6 +41,21 @@ const Schema = new mongoose.Schema(
     },
     publicLimit: {
       type: String,
+    },
+    publicList: {
+      type: [String],
+      required: true,
+      default: [],
+    },
+    waitList: {
+      type: [String],
+      required: true,
+      default: [],
+    },
+    notGoingList: {
+      type: [String],
+      required: true,
+      default: [],
     },
     image: {
       type: String,

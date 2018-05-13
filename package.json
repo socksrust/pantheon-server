@@ -11,6 +11,7 @@
     "dotenv-safe": "^4.0.4",
     "fs-extra-promise": "^1.0.1",
     "graphql": "^0.13.1",
+    "graphql-playground-middleware": "^1.1.2",
     "graphql-relay": "^0.5.4",
     "graphql-subscriptions": "^0.5.8",
     "isomorphic-fetch": "^2.2.1",
