@@ -1,3 +1,28 @@
+input AddEventInput {
+  """event title"""
+  title: String!
+
+  """event description"""
+  description: String!
+
+  """event date"""
+  date: String!
+
+  """event date"""
+  publicLimit: String!
+
+  """event image"""
+  image: String
+  schedule: [schedule]
+  clientMutationId: String
+}
+
+type AddEventPayload {
+  error: String
+  me: User
+  clientMutationId: String
+}
+
 input ChangePasswordInput {
   oldPassword: String!
 
@@ -28,6 +53,7 @@ type Mutation {
   LoginEmail(input: LoginEmailInput!): LoginEmailPayload
   RegisterEmail(input: RegisterEmailInput!): RegisterEmailPayload
   ChangePassword(input: ChangePasswordInput!): ChangePasswordPayload
+  AddEvent(input: AddEventInput!): AddEventPayload
 }
 
 """An object with an ID"""
@@ -74,6 +100,14 @@ type RegisterEmailPayload {
   token: String
   error: String
   clientMutationId: String
+}
+
+"""event schedule"""
+input schedule {
+  talker: String
+  title: String
+  description: String
+  time: String
 }
 
 type Subscription {
