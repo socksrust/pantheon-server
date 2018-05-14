@@ -13,7 +13,7 @@ type Output = {
 };
 
 export default mutationWithClientMutationId({
-  name: 'AddEvent',
+  name: 'EventAdd',
   inputFields: {
     title: {
       type: new GraphQLNonNull(GraphQLString),
@@ -92,12 +92,13 @@ export default mutationWithClientMutationId({
     const data = new EventModel({
       ...args,
     });
-    await data.save();
+    const event = await data.save();
 
     // return event;
     return {
       message: 'Event created with success',
       error: null,
+      event,
     };
   },
   outputFields: {
