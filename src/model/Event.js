@@ -31,6 +31,7 @@ const Schema = new mongoose.Schema(
       type: { type: String, default: 'Point' },
       coordinates: { type: [Number, Number], default: [0, 0] },
       cep: { type: String },
+      index: true,
     },
     publicLimit: {
       type: String,
