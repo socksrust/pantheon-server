@@ -16,15 +16,6 @@ const SchemaSchedule = new mongoose.Schema({
   },
 });
 
-const SchemaLocation = new mongoose.Schema({
-  cep: {
-    type: String,
-  },
-  geoLocation: {
-    type: [String],
-  },
-});
-
 const Schema = new mongoose.Schema(
   {
     title: {
@@ -37,7 +28,9 @@ const Schema = new mongoose.Schema(
       type: String,
     },
     location: {
-      type: SchemaLocation,
+      type: { type: String, default: 'Point' },
+      coordinates: { type: [Number, Number], default: [0, 0] },
+      cep: { type: String },
     },
     publicLimit: {
       type: String,

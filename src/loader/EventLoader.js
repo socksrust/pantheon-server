@@ -2,8 +2,9 @@
 import DataLoader from 'dataloader';
 import { Event as EventModel } from '../model';
 import { connectionFromMongoCursor, mongooseLoader } from '@entria/graphql-mongoose-loader';
-
+import idx from 'idx';
 import type { ConnectionArguments } from 'graphql-relay';
+
 import type { GraphQLContext } from '../TypeDefinition';
 
 type Schedule = {
@@ -81,7 +82,6 @@ export const load = async (context: GraphQLContext, id: string): Promise<?Event>
 export const clearCache = ({ dataloaders }: GraphQLContext, id: string) => dataloaders.EventLoader.clear(id.toString());
 
 export const loadEvents = async (context: GraphQLContext, args: ConnectionArguments) => {
-  console.log('context****', context);
   let conditions = {};
 
   if (args.search) {
@@ -89,6 +89,24 @@ export const loadEvents = async (context: GraphQLContext, args: ConnectionArgume
       ...conditions,
       title: {
         $regex: new RegExp(`${args.search}`, 'ig'),
+      },
+    };
+  }
+
+  if (args.distance && idx(args, _ => _.coordinates[0])) {
+    const longitude = args.coordinates[0];
+    const latitude = args.coordinates[1];
+
+    conditions = {
+      location: {
+        $near: {
+          $geometry: {
+            coordinates: [longitude, latitude],
+            type: 'Point',
+          },
+          $maxDistance: args.distance,
+          $minDistance: 0,
+        },
       },
     };
   }
