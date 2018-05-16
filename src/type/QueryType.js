@@ -33,8 +33,7 @@ export default new GraphQLObjectType({
     node: NodeField,
     me: {
       type: UserType,
-      resolve: (root: UserPayload, args: void, context: GraphQLContext) =>
-        context.user ? UserLoader.load(context, context.user._id) : null,
+      resolve: (root: UserPayload, args: Object, context: GraphQLContext) => UserLoader.load(context, context.user._id),
     },
     events: {
       type: EventsConnection.connectionType,

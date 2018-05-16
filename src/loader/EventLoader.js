@@ -81,8 +81,19 @@ export const load = async (context: GraphQLContext, id: string): Promise<?Event>
 export const clearCache = ({ dataloaders }: GraphQLContext, id: string) => dataloaders.EventLoader.clear(id.toString());
 
 export const loadEvents = async (context: GraphQLContext, args: ConnectionArguments) => {
-  const where = args.search ? { name: { $regex: new RegExp(`^${args.search}`, 'ig') } } : {};
-  const events = EventModel.find(where, { _id: 1 }).sort({ createdAt: -1 });
+  console.log('context****', context);
+  let conditions = {};
+
+  if (args.search) {
+    conditions = {
+      ...conditions,
+      title: {
+        $regex: new RegExp(`${args.search}`, 'ig'),
+      },
+    };
+  }
+
+  const events = EventModel.find(conditions).sort({ createdAt: -1 });
 
   return connectionFromMongoCursor({
     cursor: events,
