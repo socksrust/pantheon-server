@@ -5,7 +5,8 @@ import { GraphQLObjectType } from 'graphql';
 import LoginEmail from '../mutation/LoginEmailMutation';
 import RegisterEmail from '../mutation/RegisterEmailMutation';
 import ChangePassword from '../mutation/ChangePasswordMutation';
-import AddEvent from '../mutation/AddEventMutation';
+
+import EventAdd from '../mutation/EventAddMutation';
 import AttendToEvent from '../mutation/AttendToEventMutation';
 import CantGoToEvent from '../mutation/CantGoToEventMutation';
 import MoveToPresenceList from '../mutation/MoveToPresenceListMutation';
@@ -17,8 +18,10 @@ export default new GraphQLObjectType({
     LoginEmail,
     RegisterEmail,
     ChangePassword,
+
     // events
-    AddEvent,
+    EventAdd,
+
     // event list management
     AttendToEvent,
     CantGoToEvent,
