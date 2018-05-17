@@ -1,6 +1,14 @@
 // @flow
 
-import { GraphQLObjectType, GraphQLString, GraphQLNonNull, GraphQLID } from 'graphql';
+import {
+  GraphQLObjectType,
+  GraphQLString,
+  GraphQLNonNull,
+  GraphQLID,
+  GraphQLList,
+  GraphQLFloat,
+  GraphQLInt,
+} from 'graphql';
 import { connectionArgs, fromGlobalId } from 'graphql-relay';
 import { NodeField } from '../interface/NodeInterface';
 
@@ -42,6 +50,12 @@ export default new GraphQLObjectType({
         ...connectionArgs,
         search: {
           type: GraphQLString,
+        },
+        distance: {
+          type: GraphQLInt,
+        },
+        coordinates: {
+          type: new GraphQLList(GraphQLFloat),
         },
       },
       resolve: (obj: EventPayload, args: ConectionArguments, context: GraphQLContext) =>

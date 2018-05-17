@@ -1,6 +1,6 @@
 // @flow
 
-import { GraphQLObjectType, GraphQLString, GraphQLList } from 'graphql';
+import { GraphQLObjectType, GraphQLString, GraphQLList, GraphQLInputObjectType, GraphQLFloat } from 'graphql';
 import { globalIdField } from 'graphql-relay';
 import { NodeInterface } from '../interface/NodeInterface';
 import ScheduleType from './ScheduleType';

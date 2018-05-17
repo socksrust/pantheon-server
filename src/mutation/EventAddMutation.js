@@ -1,4 +1,4 @@
-import { GraphQLString, GraphQLNonNull, GraphQLInputObjectType, GraphQLList } from 'graphql';
+import { GraphQLString, GraphQLNonNull, GraphQLInputObjectType, GraphQLList, GraphQLFloat } from 'graphql';
 
 import { mutationWithClientMutationId } from 'graphql-relay';
 
@@ -43,8 +43,8 @@ export default mutationWithClientMutationId({
           cep: {
             type: GraphQLString,
           },
-          geolocation: {
-            type: new GraphQLList(GraphQLString),
+          coordinates: {
+            type: new GraphQLList(GraphQLFloat),
           },
         }),
       }),
