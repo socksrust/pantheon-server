@@ -98,6 +98,7 @@ export const loadEvents = async (context: GraphQLContext, args: ConnectionArgume
     const latitude = args.coordinates[1];
 
     conditions = {
+      ...conditions,
       location: {
         $near: {
           $geometry: {
