@@ -40,11 +40,17 @@ export default mutationWithClientMutationId({
         name: 'location',
         description: 'event location',
         fields: () => ({
+          coordinates: {
+            type: new GraphQLList(GraphQLFloat),
+          },
           cep: {
             type: GraphQLString,
           },
-          coordinates: {
-            type: new GraphQLList(GraphQLFloat),
+          street: {
+            type: GraphQLString,
+          },
+          number: {
+            type: GraphQLString,
           },
         }),
       }),
