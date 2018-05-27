@@ -42,6 +42,3 @@ jobs:
         
       # run tests! commented
       #- run: yarn test
-
-      # deploy to heroku
-      - run: yarn deploy
