@@ -7,6 +7,7 @@ import ScheduleType from './ScheduleType';
 import UserType from './UserType';
 import { UserLoader } from '../loader';
 import type { EventType } from '../loader/EventLoader';
+import LocationType from './LocationType';
 
 export default new GraphQLObjectType({
   name: 'Event',
@@ -30,7 +31,7 @@ export default new GraphQLObjectType({
       resolve: (obj: EventType) => obj.date,
     },
     location: {
-      type: GraphQLString,
+      type: LocationType,
       resolve: obj => obj.location,
     },
     publicLimit: {
