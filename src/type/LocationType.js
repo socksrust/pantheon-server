@@ -1,8 +1,8 @@
 import { GraphQLObjectType, GraphQLString, GraphQLList, GraphQLFloat } from 'graphql';
 
 export default new GraphQLObjectType({
-  name: 'location',
-  description: 'event location',
+  name: 'Location',
+  description: 'Location Type',
   fields: () => ({
     coordinates: {
       type: new GraphQLList(GraphQLFloat),
