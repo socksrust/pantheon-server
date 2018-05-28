@@ -14,6 +14,14 @@ type Schedule = {
   time: number,
 };
 
+type LocationType = {
+  coordinates: Array<string>,
+  cep: string,
+  type: string,
+  street: string,
+  number: string,
+};
+
 export type EventType = {
   id: string,
   _id: string,
@@ -24,6 +32,7 @@ export type EventType = {
   publicLimit: string,
   active: boolean,
   schedule: Array<Schedule>,
+  location: LocationType,
   publicList: Array<string>,
   waitList: Array<string>,
   notGoingList: Array<string>,
@@ -42,6 +51,7 @@ export default class Event {
   publicList: Array<string>;
   waitList: Array<string>;
   notGoingList: Array<string>;
+  location: LocationType;
 
   constructor(data: EventType) {
     this.id = data.id;
@@ -54,6 +64,7 @@ export default class Event {
     this.active = data.active;
     this.schedule = data.schedule;
     this.publicList = data.publicList;
+    this.location = data.location;
     this.waitList = data.waitList;
     this.notGoingList = data.notGoingList;
   }
