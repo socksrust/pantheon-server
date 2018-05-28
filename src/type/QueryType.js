@@ -54,6 +54,9 @@ export default new GraphQLObjectType({
         distance: {
           type: GraphQLInt,
         },
+        days: {
+          type: GraphQLInt,
+        },
         coordinates: {
           type: new GraphQLList(GraphQLFloat),
         },
