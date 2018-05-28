@@ -101,6 +101,6 @@
     "deploy": "cp .env.prod .env && git push heroku master && cp .env.dev .env",
     "copy-to-project": "babel-node ./scripts/copySchemaToProject.js",
     "update-schema": "babel-node ./scripts/updateSchema.js && npm run copy-to-project",
-    "watch": "nodemon src/index.js --exec babel-node"
+    "graphql": "nodemon src/index.js --exec babel-node"
   }
 }
