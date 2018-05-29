@@ -1,6 +1,6 @@
 import { GraphQLString, GraphQLNonNull, GraphQLID } from 'graphql';
 
-import { mutationWithClientMutationId } from 'graphql-relay';
+import { fromGlobalId, mutationWithClientMutationId } from 'graphql-relay';
 
 import { Event as EventModel } from '../model';
 import type { GraphQLContext } from '../TypeDefinition';
@@ -32,7 +32,7 @@ export default mutationWithClientMutationId({
     const { eventId } = args;
 
     const event = await EventModel.findOne({
-      _id: eventId,
+      _id: fromGlobalId(eventId).id,
     });
 
     if (!event) {

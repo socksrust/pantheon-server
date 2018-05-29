@@ -1,6 +1,6 @@
 // @flow
 
-import { GraphQLObjectType, GraphQLString, GraphQLList, GraphQLInputObjectType, GraphQLFloat } from 'graphql';
+import { GraphQLObjectType, GraphQLString, GraphQLList, GraphQLBoolean } from 'graphql';
 import { globalIdField } from 'graphql-relay';
 import { NodeInterface } from '../interface/NodeInterface';
 import ScheduleType from './ScheduleType';
@@ -71,6 +71,11 @@ export default new GraphQLObjectType({
         const usersArray = obj.waitList.map(people => UserLoader.load(context, people));
         return obj.waitList.length >= 1 ? usersArray : [];
       },
+    },
+    isEventAttended: {
+      type: GraphQLBoolean,
+      description: 'Check if user attended to the event',
+      resolve: (obj, args, context) => obj.publicList.includes(context.user._id.toString()),
     },
   }),
   interfaces: () => [NodeInterface],
