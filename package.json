@@ -98,7 +98,7 @@
     "start": "yarn build && node dist/index.js",
     "test": "jest --coverage --forceExit --runInBand",
     "test:watch": "jest --watch --coverage",
-    "deploy": "cp .env.prod .env && git push heroku master && cp .env.dev .env",
+    "deploy": "git push heroku master",
     "copy-to-project": "babel-node ./scripts/copySchemaToProject.js",
     "update-schema": "babel-node ./scripts/updateSchema.js && npm run copy-to-project",
     "graphql": "nodemon src/index.js --exec babel-node"
