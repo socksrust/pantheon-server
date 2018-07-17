@@ -1,6 +1,6 @@
-import { GraphQLString, GraphQLNonNull, GraphQLInputObjectType, GraphQLList, GraphQLFloat } from 'graphql';
+import { GraphQLID, GraphQLString, GraphQLNonNull, GraphQLInputObjectType, GraphQLList, GraphQLFloat } from 'graphql';
 
-import { mutationWithClientMutationId } from 'graphql-relay';
+import { mutationWithClientMutationId, fromGlobalId } from 'graphql-relay';
 
 import { Event as EventModel } from '../model';
 import EventType from '../type/EventType';
@@ -15,8 +15,12 @@ type Output = {
 };
 
 export default mutationWithClientMutationId({
-  name: 'EventAdd',
+  name: 'EventEdit',
   inputFields: {
+    id: {
+      type: GraphQLNonNull(GraphQLID),
+      description: 'event title',
+    },
     title: {
       type: GraphQLNonNull(GraphQLString),
       description: 'event title',
@@ -50,7 +54,7 @@ export default mutationWithClientMutationId({
       throw new Error('invalid user');
     }
 
-    const { title } = args;
+    const { title, id } = args;
 
     // @TODO improve validation logic
     if (!title.trim() || title.trim().length < 2) {
@@ -61,15 +65,16 @@ export default mutationWithClientMutationId({
     }
 
     // Create new record
-    const data = new EventModel({
-      ...args,
-      createdBy: user._id,
-    });
-    const event = await data.save();
+    const event = await EventModel.findOne({ _id: fromGlobalId(id).id });
+    await event
+      .set({
+        ...args,
+      })
+      .save();
 
     // return event;
     return {
-      message: 'Event created with success',
+      message: 'Event edited with success',
       error: null,
       event,
     };

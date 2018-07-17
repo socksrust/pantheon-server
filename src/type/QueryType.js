@@ -68,7 +68,7 @@ export default new GraphQLObjectType({
       type: EventType,
       args: {
         id: {
-          type: new GraphQLNonNull(GraphQLID),
+          type: GraphQLID,
         },
       },
       resolve: (obj: EventPayload, args: LoadByIdArgs, context: GraphQLContext) => {

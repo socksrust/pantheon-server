@@ -38,6 +38,13 @@ export default new GraphQLObjectType({
       type: GraphQLString,
       resolve: (obj: EventType) => obj.publicLimit,
     },
+    isOwner: {
+      type: GraphQLString,
+      resolve: (obj: EventType, args, context) => {
+        const { user } = context;
+        return obj.createdBy.equals(user._id);
+      },
+    },
     image: {
       type: GraphQLString,
       description: 'event image',

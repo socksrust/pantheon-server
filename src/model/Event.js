@@ -1,5 +1,6 @@
 // @flow
 import mongoose from 'mongoose';
+const { ObjectId } = mongoose.Schema.Types;
 
 const SchemaSchedule = new mongoose.Schema({
   talker: {
@@ -20,6 +21,12 @@ const Schema = new mongoose.Schema(
   {
     title: {
       type: String,
+    },
+    createdBy: {
+      type: ObjectId,
+      ref: 'User',
+      required: true,
+      description: 'User that created this event',
     },
     description: {
       type: String,
@@ -65,5 +72,7 @@ const Schema = new mongoose.Schema(
     collection: 'event',
   },
 );
+
+Schema.index({ location: '2dsphere' });
 
 export default mongoose.model('Event', Schema);

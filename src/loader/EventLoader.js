@@ -4,6 +4,7 @@ import { Event as EventModel } from '../model';
 import { connectionFromMongoCursor, mongooseLoader } from '@entria/graphql-mongoose-loader';
 import idx from 'idx';
 import type { ConnectionArguments } from 'graphql-relay';
+import type { ObjectId } from 'mongoose';
 
 import type { GraphQLContext } from '../TypeDefinition';
 
@@ -24,7 +25,7 @@ type LocationType = {
 
 export type EventType = {
   id: string,
-  _id: string,
+  _id: ObjectId,
   image: string,
   title: string,
   description: string,
@@ -36,11 +37,12 @@ export type EventType = {
   publicList: Array<string>,
   waitList: Array<string>,
   notGoingList: Array<string>,
+  createdBy: ObjectId,
 };
 
 export default class Event {
   id: string;
-  _id: string;
+  _id: ObjectId;
   image: string;
   title: string;
   description: string;
@@ -52,6 +54,7 @@ export default class Event {
   waitList: Array<string>;
   notGoingList: Array<string>;
   location: LocationType;
+  createdBy: ObjectId;
 
   constructor(data: EventType) {
     this.id = data.id;
@@ -67,6 +70,7 @@ export default class Event {
     this.location = data.location;
     this.waitList = data.waitList;
     this.notGoingList = data.notGoingList;
+    this.createdBy = data.createdBy;
   }
 }
 
@@ -123,6 +127,7 @@ export const loadEvents = async (context: GraphQLContext, args: ConnectionArgume
     };
   }
 
+  console.log('args***', args);
   const events = EventModel.find(conditions).sort({ createdAt: -1 });
 
   return connectionFromMongoCursor({
