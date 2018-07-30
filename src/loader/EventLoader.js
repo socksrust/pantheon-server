@@ -120,7 +120,7 @@ export const loadEvents = async (context: GraphQLContext, args: ConnectionArgume
             coordinates: [longitude, latitude],
             type: 'Point',
           },
-          $maxDistance: args.distance,
+          $maxDistance: args.distance * 1000,
           $minDistance: 0,
         },
       },
