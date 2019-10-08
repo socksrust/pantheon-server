@@ -2459,9 +2459,11 @@ graphql-playground-middleware@^1.1.2:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/graphql-playground-middleware/-/graphql-playground-middleware-1.1.2.tgz#f8503b1b89cf6dcf79f1873feb1e821b4d099bd7"
 
-graphql-relay@^0.5.4:
-  version "0.5.4"
-  resolved "https://registry.yarnpkg.com/graphql-relay/-/graphql-relay-0.5.4.tgz#58050cfe16118595f82ab3aabfc974546ce755a8"
+graphql-relay@^0.6.0:
+  version "0.6.0"
+  resolved "https://registry.yarnpkg.com/graphql-relay/-/graphql-relay-0.6.0.tgz#18ec36b772cfcb3dbb9bd369c3f8004cf42c7b93"
+  dependencies:
+    prettier "^1.16.0"
 
 graphql-subscriptions@^0.5.8:
   version "0.5.8"
@@ -4531,9 +4533,9 @@ preserve@^0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/preserve/-/preserve-0.2.0.tgz#815ed1f6ebc65926f865b310c0713bcb3315ce4b"
 
-prettier@^1.11.1:
-  version "1.11.1"
-  resolved "https://registry.yarnpkg.com/prettier/-/prettier-1.11.1.tgz#61e43fc4cd44e68f2b0dfc2c38cd4bb0fccdcc75"
+prettier@^1.11.1, prettier@^1.16.0:
+  version "1.18.2"
+  resolved "https://registry.yarnpkg.com/prettier/-/prettier-1.18.2.tgz#6823e7c5900017b4bd3acf46fe9ac4b4d7bda9ea"
 
 pretty-format@^21.2.1:
   version "21.2.1"
