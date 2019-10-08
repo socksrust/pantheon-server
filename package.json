@@ -3,7 +3,7 @@
   "description": "GraphQL DataLoader boilerplate",
   "version": "0.0.1",
   "dependencies": {
-    "@entria/graphql-mongoose-loader": "^1.1.1",
+    "@entria/graphql-mongoose-loader": "^4.2.0",
     "apollo-server-koa": "^1.3.2",
     "babel-polyfill": "^6.26.0",
     "bcryptjs": "^2.4.3",
