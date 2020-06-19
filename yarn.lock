@@ -79,9 +79,9 @@
     lodash "^4.2.0"
     to-fast-properties "^2.0.0"
 
-"@entria/graphql-mongoose-loader@^1.1.1":
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/@entria/graphql-mongoose-loader/-/graphql-mongoose-loader-1.1.1.tgz#7de003ef298d4c339bd876f6d122a0e4aa1dcc82"
+"@entria/graphql-mongoose-loader@^4.3.1":
+  version "4.3.1"
+  resolved "https://registry.yarnpkg.com/@entria/graphql-mongoose-loader/-/graphql-mongoose-loader-4.3.1.tgz#449a260a78cb6d7ffa1a181605957d87dba5c793"
 
 "@types/node@*":
   version "8.5.7"
