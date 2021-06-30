@@ -2459,9 +2459,9 @@ graphql-playground-middleware@^1.1.2:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/graphql-playground-middleware/-/graphql-playground-middleware-1.1.2.tgz#f8503b1b89cf6dcf79f1873feb1e821b4d099bd7"
 
-graphql-relay@^0.5.4:
-  version "0.5.4"
-  resolved "https://registry.yarnpkg.com/graphql-relay/-/graphql-relay-0.5.4.tgz#58050cfe16118595f82ab3aabfc974546ce755a8"
+graphql-relay@^0.8.0:
+  version "0.8.0"
+  resolved "https://registry.yarnpkg.com/graphql-relay/-/graphql-relay-0.8.0.tgz#35f0090f0f056192767c1acdaa402daed19ede6d"
 
 graphql-subscriptions@^0.5.8:
   version "0.5.8"
